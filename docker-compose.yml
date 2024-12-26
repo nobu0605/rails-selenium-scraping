@@ -1,0 +1,18 @@
+version: "3.8"
+services:
+  web:
+    build:
+      context: .
+    volumes:
+      - .:/app
+    ports:
+      - "3000:3000"
+    environment:
+      - BROWSER=remote
+    depends_on:
+      - selenium
+  selenium:
+    # seleniumだとApple Siliconで動かないので、代わりにseleniarmを使う
+    image: seleniarm/standalone-chromium:4.17.0
+    ports:
+      - "4444:4444"
